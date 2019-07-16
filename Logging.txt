@@ -1,6 +1,2 @@
-Jul 16, 2019 12:41:06 PM com.marketing.service.impl.ImportServiceImpl importFromFile
-INFO: true
-Jul 16, 2019 12:41:06 PM com.marketing.service.impl.ImportServiceImpl importFromFile
-INFO: C:\JasonDev\github\Maia\.\resources\Input.txt
-Jul 16, 2019 12:41:06 PM com.marketing.service.impl.ImportServiceImpl importFromFile
-INFO: importFromFile1
+Jul 16, 2019 2:43:49 PM com.marketing.service.impl.ImportServiceImpl importFromFile
+INFO: Importing file...
