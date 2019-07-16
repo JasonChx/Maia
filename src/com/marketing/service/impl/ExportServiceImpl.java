@@ -16,11 +16,18 @@ public class ExportServiceImpl{
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
+	/**
+	 * Write summary report content into a csv file
+	 * 
+	 * @param summary
+	 */
 	public static void exportToFile(String summary) {
 		try {
+			LOGGER.log(Level.INFO, "Export file start...");
 			FileWriter fw = new FileWriter("Output.csv");
 			fw.write(summary);
 			fw.close();
+			LOGGER.log(Level.INFO, "Export file end...");
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, "Fail to create output file.");
 		}

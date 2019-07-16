@@ -25,9 +25,9 @@ public class Transaction {
 	
 	private String expirationDate;
 	
-	private long quantityLong;
+	private int quantityLong;
 	
-	private long quantityShort;
+	private int quantityShort;
 
 	
 	public String getClientType() {
@@ -94,19 +94,19 @@ public class Transaction {
 		this.expirationDate = expirationDate;
 	}
 
-	public long getQuantityLong() {
+	public int getQuantityLong() {
 		return quantityLong;
 	}
 
-	public void setQuantityLong(long quantityLong) {
+	public void setQuantityLong(int quantityLong) {
 		this.quantityLong = quantityLong;
 	}
 
-	public long getQuantityShort() {
+	public int getQuantityShort() {
 		return quantityShort;
 	}
 
-	public void setQuantityShort(long quantityShort) {
+	public void setQuantityShort(int quantityShort) {
 		this.quantityShort = quantityShort;
 	}
 

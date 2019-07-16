@@ -5,6 +5,7 @@ package com.marketing.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.marketing.model.Transaction;
@@ -21,12 +22,20 @@ public class SummaryServiceImpl{
 	
 	private final static String NEW_LINE = "\n";
 	
+	/**
+	 * Generate summary report content basing on transaction list 
+	 * 
+	 * @param transactionList
+	 * @return summary report content
+	 */
 	public static String generateSummaryFromTransationList(List<Transaction> transactionList) {
 		
-		HashMap<String, Long> summary = new HashMap<String, Long>();
+		HashMap<String, Integer> summary = new HashMap<String, Integer>();
 		String clientAndProduct = new String();
 		StringBuilder stringBuilder = new StringBuilder();
-		Long transationAmount;
+		Integer transationAmount;
+		LOGGER.log(Level.INFO, "Generate summary content start...");
+		// group and calculate total transaction amount for each client and product combination
 		for(Transaction transaction: transactionList){
 			stringBuilder = new StringBuilder();
 			stringBuilder.append(transaction.getClientType());
@@ -46,6 +55,7 @@ public class SummaryServiceImpl{
 				summary.put(clientAndProduct, transationAmount);
 			}
 		}
+		// add csv headers
 		stringBuilder = new StringBuilder();
 		stringBuilder.append("Client_Information");
 		stringBuilder.append(COMMA_DELIMITER);
@@ -53,13 +63,14 @@ public class SummaryServiceImpl{
 		stringBuilder.append(COMMA_DELIMITER);
 		stringBuilder.append("Total_Transaction_Amount");
 		stringBuilder.append(NEW_LINE);
+		// convert to output format
 		for(String info: summary.keySet()){
 			stringBuilder.append(info);
 			stringBuilder.append(COMMA_DELIMITER);
 			stringBuilder.append(String.valueOf(summary.get(info)));
 			stringBuilder.append(NEW_LINE);
 		}
-		
+		LOGGER.log(Level.INFO, "Generate summary content end...");
 		return stringBuilder.toString();
 	}
 

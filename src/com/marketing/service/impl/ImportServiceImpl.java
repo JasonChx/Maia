@@ -27,8 +27,14 @@ public class ImportServiceImpl {
 
 	private final static String RECODE_CODE = "315";
 
+	/**
+	 * Import transaction from input file
+	 * 
+	 * @param fileName
+	 * @return list of transaction record
+	 */
 	public static List<Transaction> importFromFile(String fileName) {
-
+		// test file from resources folder
 // 		File input = new File("./resources/" + fileName);
 
 		File input = new File(fileName);
@@ -36,14 +42,16 @@ public class ImportServiceImpl {
 		List<Transaction> transactionList = new ArrayList<Transaction>();
 
 		try {
+			// read file
 			FileReader fr = new FileReader(input);
 			BufferedReader br = new BufferedReader(fr);
-			LOGGER.log(Level.INFO, "Importing file...");
+			LOGGER.log(Level.INFO, "Import file start...");
 			String thisLine = null;
 			Transaction transaction = null;
 			while ((thisLine = br.readLine()) != null) {
 				if (!thisLine.isEmpty()) {
 					if (thisLine.length() == TOTAL_LENGTH_BEFORE_FILLER && thisLine.startsWith(RECODE_CODE)) {
+						// create transaction entry
 						transaction = new Transaction();
 						transaction.setClientType(thisLine.substring(3, 7));
 						transaction.setClientNumber(thisLine.substring(7, 11));
@@ -53,14 +61,15 @@ public class ImportServiceImpl {
 						transaction.setProducGroupCode(thisLine.substring(25, 27));
 						transaction.setSymbol(thisLine.substring(31, 37));
 						transaction.setExpirationDate(thisLine.substring(37, 45));
-						transaction.setQuantityLong(Long.valueOf(thisLine.substring(52, 62)));
-						transaction.setQuantityShort(Long.valueOf(thisLine.substring(63, 73)));
+						transaction.setQuantityLong(Integer.valueOf(thisLine.substring(52, 62)));
+						transaction.setQuantityShort(Integer.valueOf(thisLine.substring(63, 73)));
 						transactionList.add(transaction);
 					} else {
 						LOGGER.log(Level.WARNING, "Skip: Line in wrong format:\n" + thisLine);
 					}
 				}
 			}
+			LOGGER.log(Level.INFO, "Import file end...");
 		} catch (FileNotFoundException e) {
 			LOGGER.log(Level.SEVERE, "Input file not found.");
 		} catch (IOException e) {

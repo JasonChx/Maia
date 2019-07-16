@@ -1,2 +1,2 @@
-Jul 16, 2019 2:43:49 PM com.marketing.service.impl.ImportServiceImpl importFromFile
+Jul 16, 2019 3:41:15 PM com.marketing.service.impl.ImportServiceImpl importFromFile
 INFO: Importing file...
